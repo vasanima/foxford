@@ -10,7 +10,7 @@ from telebot import types
 from datetime import datetime
 
 
-bot = telebot.TeleBot('1108906002:AAEo7LEmAh16wIkkAMhIx5G5QaAyOKKoiiI')
+bot = telebot.TeleBot('token')
 
 @bot.message_handler(commands=['start', 'help'])
 def main(message):
