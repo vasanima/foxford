@@ -24,9 +24,14 @@ def get_city_name (message):
     # Дать название города
     global city_name
     city_name = message.text
+    check = get_current_weather()
 
 
-    if get_current_weather != False:
+    if check == False:
+        bot.send_message(message.chat.id, "Такой город не найден. Попробуйте еще раз.")
+        bot.register_next_step_handler(message, get_city_name)
+
+    else:
         wind, temperature, current_humidity, current_pressure, icon, weather_description = get_current_weather()
         current_temperature = temperature[0]
         current_temperature_max = temperature[2]
@@ -40,10 +45,6 @@ def get_city_name (message):
         bot.send_photo(message.chat.id, 'http://openweathermap.org/img/wn/' + str(icon) + '@2x.png')
         paste_keyboard(message)
 
-    else:
-
-        bot.send_message(message.chat.id, "Такой город не найден. Попробуйте еще раз.")
-        bot.register_next_step_handler(message, get_city_name)
 
 def get_current_weather():  # получаем дату
     global lon, lat, api_key
